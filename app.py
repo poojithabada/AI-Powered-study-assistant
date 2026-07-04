@@ -1,10 +1,10 @@
+%%writefile app.py
 import os
 from google import genai
 from google.genai import types
 import gradio as gr
 
 client=genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-print(client)
 personalities = {
   "Friendly":
   """You are a friendly, enthusiastic, and highly encouraging Study Assistant. 
@@ -28,7 +28,7 @@ def study_assistant(question,persona):
     contents=question
   )
   return response.text
-  demo = gr.Interface(
+demo = gr.Interface(
     fn=study_assistant,
     inputs=[
         gr.Textbox(lines=4, placeholder="Ask a question...", label="Question"),
@@ -38,4 +38,4 @@ def study_assistant(question,persona):
     title="Study Assistant",
     description="Ask a question and get an answer from your AI study assistant with a chosen personality."
 )
-  demo.launch(debug=True)
+demo.launch(debug=True)
